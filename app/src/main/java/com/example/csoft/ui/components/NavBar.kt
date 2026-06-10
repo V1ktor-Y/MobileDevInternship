@@ -18,7 +18,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.csoft.R
 
-data class NavigationItemProps(val text: String, val image_id: Int){}
+class NavigationItemProps(val text: String, val image_id: Int){}
 
 @Composable
 fun NavBar(navController: NavController, navItems: List<NavigationItemProps>) {
@@ -32,7 +32,7 @@ fun NavBar(navController: NavController, navItems: List<NavigationItemProps>) {
                 selected = selectedItem == index,
                 onClick = {
                     selectedItem = index
-                    // Handle navigation here
+                    navController.navigate(item.text)
                 }
             )
         }
@@ -42,9 +42,9 @@ fun NavBar(navController: NavController, navItems: List<NavigationItemProps>) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    val navItems = listOf(NavigationItemProps(text = "Dashboard", image_id = R.drawable.ic_bill),
+    val navItems = listOf(NavigationItemProps(text = "Dashboard", image_id = R.drawable.ic_house),
         NavigationItemProps(text = "Transactions", R.drawable.ic_money_insert),
-        NavigationItemProps(text = "Categories", R.drawable.ic_check_write)
+        NavigationItemProps(text = "Categories", R.drawable.ic_category)
     )
     val navController = rememberNavController()
     NavBar(navController, navItems)
