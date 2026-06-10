@@ -5,39 +5,41 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.csoft.ui.components.BottomNav
-import com.example.csoft.ui.theme.CSoftTheme
+import androidx.navigation.compose.rememberNavController
+import com.example.csoft.ui.components.NavBar
+import com.example.csoft.ui.components.NavigationItemProps
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navItems = listOf(NavigationItemProps(text = "Dashboard", image_id = R.drawable.ic_bill),
+                NavigationItemProps(text = "Transactions", R.drawable.ic_money_insert),
+                NavigationItemProps(text = "Categories", R.drawable.ic_check_write)
+            )
+            val navController = rememberNavController()
+            Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = { NavBar(navController = navController, navItems = navItems) } ) { innerPadding ->
+                Text(text = "Hello world")
+            }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = { BottomNav() } ) { innerPadding ->
-        Greeting(
-            name = "Jefrasda",
-            modifier = Modifier.padding(innerPadding)
-        )
+fun MainPreview() {
+    val navItems = listOf(NavigationItemProps(text = "Dashboard", image_id = R.drawable.ic_bill),
+        NavigationItemProps(text = "Transactions", R.drawable.ic_money_insert),
+        NavigationItemProps(text = "Categories", R.drawable.ic_check_write)
+    )
+    val navController = rememberNavController()
+    Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = { NavBar(navController = navController, navItems = navItems) } ) { innerPadding ->
+        Text(text = "Hello world")
     }
 }
