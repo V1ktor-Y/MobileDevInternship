@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.csoft.R
+import com.example.csoft.domain.DummyDataService
 import com.example.csoft.ui.category.CategoryScreen
 import com.example.csoft.ui.components.NavigationItemProps
 import com.example.csoft.ui.dashboard.DashboardScreen
@@ -23,19 +24,19 @@ class NavigationManager {
     val startDestination = "Dashboard"
 
     @Composable
-    fun SetupNavGraph(navController: NavHostController) {
+    fun SetupNavGraph(navController: NavHostController, dummyDataService: DummyDataService) {
         NavHost(
             navController = navController,
             startDestination = startDestination
         ) {
             composable(route = "Dashboard") {
-                DashboardScreen()
+                DashboardScreen(dummyDataService)
             }
             composable(route = "Transactions") {
-                TransactionScreen()
+                TransactionScreen(dummyDataService)
             }
             composable(route = "Categories") {
-                CategoryScreen()
+                CategoryScreen(dummyDataService)
             }
         }
     }

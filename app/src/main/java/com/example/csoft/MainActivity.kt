@@ -14,6 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.example.csoft.data.DummyData
+import com.example.csoft.domain.DummyDataService
 import com.example.csoft.navigation.NavigationManager
 import com.example.csoft.ui.components.NavBar
 import com.example.csoft.ui.components.NavigationItemProps
@@ -25,6 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             val navManager = remember { NavigationManager() }
+            val dataService = DummyDataService(DummyData())
 
             Scaffold(
                 bottomBar = {
@@ -32,9 +35,13 @@ class MainActivity : ComponentActivity() {
                 }
             ) { paddingValues ->
                 Box(modifier = Modifier.padding(paddingValues)) {
-                    navManager.SetupNavGraph(navController = navController)
+                    navManager.SetupNavGraph(
+                        navController = navController,
+                        dummyDataService = dataService
+                    )
                 }
             }
+
         }
     }
 }
@@ -44,6 +51,7 @@ class MainActivity : ComponentActivity() {
 fun MainPreview() {
     val navController = rememberNavController()
     val navManager = remember { NavigationManager() }
+    val dataService = DummyDataService(DummyData())
 
     Scaffold(
         bottomBar = {
@@ -51,7 +59,7 @@ fun MainPreview() {
         }
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
-            navManager.SetupNavGraph(navController = navController)
+            navManager.SetupNavGraph(navController = navController, dummyDataService = dataService)
         }
     }
 }
