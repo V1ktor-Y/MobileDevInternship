@@ -2,6 +2,7 @@ package com.example.csoft.domain
 
 class Transaction(
     //val sender: String,
+    val id: Int,
     val recipient: String,
     val sum: Double,
     val currency: Currency,
