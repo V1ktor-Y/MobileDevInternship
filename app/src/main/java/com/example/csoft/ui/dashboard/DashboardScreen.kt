@@ -29,17 +29,17 @@ fun DashboardScreen(dataService: TransactionService) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
 
         ) {
-        item {
+        item(key = "Total") {
             SectionLabel("Total")
             TransactionCard(dataService.getTotalSpentTransaction())
         }
 
-        item {
+        item(key = "Largest") {
             SectionLabel("Largest Transaction")
             TransactionCard(dataService.getLargestTransaction())
         }
 
-        item {
+        item(key = "Recent") {
             SectionLabel("Recent Transactions")
         }
 
@@ -49,10 +49,9 @@ fun DashboardScreen(dataService: TransactionService) {
         ) { transaction ->
             TransactionCard(transaction)
         }
-        item {
+        item(key = "Category") {
             SectionLabel("Category Overview")
-        }
-        item {
+
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
                 maxItemsInEachRow = 2,
@@ -64,7 +63,7 @@ fun DashboardScreen(dataService: TransactionService) {
                 }
             }
         }
-        item { Spacer(Modifier.padding(16.dp)) }
+        item(key = "BottomSpacer") { Spacer(Modifier.padding(16.dp)) }
     }
 }
 
