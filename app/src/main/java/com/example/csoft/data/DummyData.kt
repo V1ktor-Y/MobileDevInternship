@@ -56,4 +56,8 @@ class DummyData : TransactionsRepository {
         return transactions?.sumOf { it.sum }
     }
 
+    override fun getCategorySum(category: Category): Double? {
+        return transactions?.filter { it.category == category }?.sumOf { it.sum }
+    }
+
 }

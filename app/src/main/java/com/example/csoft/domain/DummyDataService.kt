@@ -19,4 +19,13 @@ class DummyDataService(val dummyRepo: TransactionsRepository) : TransactionServi
         val totalSum = dummyRepo.getTotalSpentTransaction() ?: 0.0
         return Transaction(0, "Total", totalSum, Currency.USD, Category.OTHER)
     }
+
+    override fun getCategoryPercent(category: Category): Double {
+        val totalSum = dummyRepo.getTotalSpentTransaction() ?: 0.0
+        val categorySum = dummyRepo.getCategorySum(category)
+        if (categorySum == null || categorySum <= 0.0){
+            return 0.0
+        }
+        return (categorySum / totalSum) * 100
+    }
 }
